@@ -1,14 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.studentEmployee.StudentEmployee"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.studentEmployee.StudentEmployee">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <HBox prefHeight="107.0" prefWidth="800.0" style="-fx-background-color: d3d3d3;">
+               <children>
+                  <ImageView fitHeight="84.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../1535.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="studentIDTextField" promptText="STUDENT ID">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" top="30.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#confirmStudentID" text="CONFIRM">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancel" text="CANCEL">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Separator prefHeight="0.0" prefWidth="800.0" />
+            <HBox prefHeight="69.0" prefWidth="800.0">
+               <children>
+                  <Label text="STUDENT ID:">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="studentIDLabel" text="000000">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <GridPane prefHeight="287.0" prefWidth="800.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.80003662109374" minWidth="10.0" prefWidth="282.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.60003662109375" minWidth="0.0" prefWidth="32.20001220703125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.7999633789063" minWidth="10.0" prefWidth="137.80001220703122" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.7999633789063" minWidth="10.0" prefWidth="218.79997558593743" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="519.7999633789063" minWidth="10.0" prefWidth="133.20002441406245" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="96.79999389648438" minHeight="10.0" prefHeight="96.79999389648438" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="90.60001220703126" minHeight="0.0" prefHeight="21.600018310546872" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="191.6" minHeight="10.0" prefHeight="169.59998168945313" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Separator>
+                  <TableView fx:id="materialsTableView" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="3">
+                    <columns>
+                      <TableColumn fx:id="materialColumn" prefWidth="166.4000244140625" text="MATERIAL" />
+                      <TableColumn fx:id="amountColumn" prefWidth="99.99996948242188" text="AMOUNT" />
+                    </columns>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </TableView>
+                  <TextField fx:id="addMaterialTextField" promptText="AMOUNT" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <ComboBox fx:id="addMaterialComboBox" prefHeight="26.0" prefWidth="186.0" promptText="MATERIAL" GridPane.columnIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#addMaterial" text="ADD" GridPane.columnIndex="4" />
+                  <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                  <Label text="LICENCES:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <children>
+                        <CheckBox fx:id="laserCutterLicenceCheckBox" mnemonicParsing="false" text="LASER CUTTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="threeDimensionalPrinterCheckBox" mnemonicParsing="false" text="3D PRINTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="60.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#changeLicence" text="CHANGE LICENCE" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
