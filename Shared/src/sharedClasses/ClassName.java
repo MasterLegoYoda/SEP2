@@ -3,5 +3,6 @@ package sharedClasses;
 public enum ClassName
 {
   MaterialList,
-  User
+  User,
+  AuthPackage
 }
