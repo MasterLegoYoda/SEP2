@@ -1,3 +1,4 @@
 public enum ClassName
 {
+  MaterialList
 }
