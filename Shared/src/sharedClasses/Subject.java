@@ -1,3 +1,5 @@
+package sharedClasses;
+
 import java.beans.PropertyChangeListener;
 
 public interface Subject

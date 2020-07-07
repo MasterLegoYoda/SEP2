@@ -1,3 +1,5 @@
+package sharedClasses;
+
 public interface User
 {
   public int getID();

@@ -1,3 +1,7 @@
+package sharedClasses;
+
+import sharedClasses.Material;
+
 import java.io.Serializable;
 
 public class UsedMaterial implements Serializable

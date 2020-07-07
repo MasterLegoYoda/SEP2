@@ -1,3 +1,5 @@
+package sharedClasses;
+
 import java.io.Serializable;
 
 public class Material implements Serializable

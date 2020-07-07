@@ -1,5 +1,5 @@
 package database;
 
-public class LoadMaterialImpl implements LoaMaterial
+public class LoadMaterialImpl implements LoadMaterial
 {
 }
