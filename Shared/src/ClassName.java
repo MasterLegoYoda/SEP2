@@ -1,4 +1,5 @@
 public enum ClassName
 {
-  MaterialList
+  MaterialList,
+  User
 }
