@@ -1,5 +1,5 @@
 package database;
 
-public class LoadUser
+public interface LoadUser
 {
 }

@@ -1,5 +1,5 @@
 package database;
 
-public class InsertUser
+public interface InsertUser
 {
 }
