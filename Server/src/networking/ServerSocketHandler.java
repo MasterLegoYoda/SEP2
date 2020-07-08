@@ -25,7 +25,7 @@ public class ServerSocketHandler implements Runnable
   private LoadUser loadUser;
   private User user;
 
-  public ServerSocketHandler(ConnectionPool pool, Socket socket,
+  public ServerSocketHandler(Socket socket, ConnectionPool pool,
       Auth authenticator, InsertUser insertUser, LoadMaterial loadMaterial,
       LoadUser loadUser) throws IOException
   {
