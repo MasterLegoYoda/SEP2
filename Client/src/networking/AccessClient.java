@@ -1,5 +1,8 @@
 package networking;
 
-public interface AccessClient
+import sharedClasses.Subject;
+
+public interface AccessClient extends Subject
 {
+  void transmitCMD(String cmd);
 }

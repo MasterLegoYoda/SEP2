@@ -44,20 +44,20 @@ public class ServerSocketHandler implements Runnable
   {
     try
     {
-      Container inDataPack = (Container) inFromClient.readObject();
+      Container incomingContainer = (Container) inFromClient.readObject();
 
 
-      switch (inDataPack.getClassName())
+      switch (incomingContainer.getClassName())
       {
         case AuthPackage:
         {
-          boolean answer = false;
-          AuthPack tmpAuth = (AuthPack)inDataPack.getObject();
+          boolean infoCorrectness = false;
+          AuthPack tmpAuth = (AuthPack)incomingContainer.getObject();
           int id = tmpAuth.getId();
           int password = tmpAuth.getPassword();
           try
           {
-            answer = authenticator.authenticate(id,password);
+            infoCorrectness = authenticator.authenticate(id,password);
           }
           catch (SQLException e)
           {
@@ -65,7 +65,7 @@ public class ServerSocketHandler implements Runnable
           }
           try
           {
-            if(answer)
+            if(infoCorrectness)
             {
               user = loadUser.loadUser(id);
               connectionPool.userJoin(user);
@@ -75,7 +75,7 @@ public class ServerSocketHandler implements Runnable
               Container outContainer2 = new Container(loadMaterial.loadMaterial(),ClassName.MaterialList);
               sendBackData(outContainer2);
             }
-            else if(!answer)
+            else if(!infoCorrectness)
             {
               String msg = "Wrong Credentials";
               Container wrongCreds = new Container(msg,ClassName.WrongCredentials);
@@ -92,12 +92,12 @@ public class ServerSocketHandler implements Runnable
           {
             if(user.getStatus() == 1)
             {
-                if(loadUser.loadUser(((User) inDataPack.getObject()).getID()).getStatus() == ((User) inDataPack.getObject()).getStatus())
+                if(loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())
                 {
                   //I know I could have used one if statement, but i wanted to have them separate for possible bugs
-                  if(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)inDataPack.getObject()).getLicences()))
+                  if(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)incomingContainer.getObject()).getLicences()))
                   {
-                    user = (User)inDataPack.getObject();
+                    user = (User)incomingContainer.getObject();
                     insertUser.insertUser(user);
                     Container outContainer = new Container(user, ClassName.User);
                     sendBackData(outContainer);
@@ -106,24 +106,24 @@ public class ServerSocketHandler implements Runnable
             }
             else if(user.getStatus() == 1)
             {
-              if(loadUser.loadUser(((User) inDataPack.getObject()).getID()).getStatus() == ((User) inDataPack.getObject()).getStatus())
+              if(loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())
               {
-                insertUser.insertUser((User)inDataPack.getObject());
-                connectionPool.updateOnlineUserInfo((User)inDataPack.getObject());
+                insertUser.insertUser((User)incomingContainer.getObject());
+                connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
               }
             }
             else if(user.getStatus() == 2)
             {
-              if((loadUser.loadUser(((User) inDataPack.getObject()).getID()).getStatus() == ((User) inDataPack.getObject()).getStatus())&&(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)inDataPack.getObject()).getLicences())))
+              if((loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())&&(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)incomingContainer.getObject()).getLicences())))
               {
-                insertUser.insertUser((User)inDataPack.getObject());
-                connectionPool.updateOnlineUserInfo((User)inDataPack.getObject());
+                insertUser.insertUser((User)incomingContainer.getObject());
+                connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
               }
             }
             else if(user.getStatus() == 3)
             {
-              insertUser.insertUser((User)inDataPack.getObject());
-              connectionPool.updateOnlineUserInfo((User)inDataPack.getObject());
+              insertUser.insertUser((User)incomingContainer.getObject());
+              connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
             }
           }
           catch (SQLException e)
@@ -135,7 +135,7 @@ public class ServerSocketHandler implements Runnable
         {
           try
           {
-            Integer tempID = (Integer) inDataPack.getObject();
+            Integer tempID = (Integer) incomingContainer.getObject();
             if(user.getStatus() == 1 || user.getStatus() == 2 || user.getStatus() == 3)
             {
               loadUser.loadUser(tempID.intValue());
