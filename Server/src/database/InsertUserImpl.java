@@ -16,6 +16,7 @@ public class InsertUserImpl implements InsertUser
                     "password");
             Statement st = connection.createStatement();
             String query = "UPDATE User SET status="+user.getStatus()+" WHERE id="+user.getID();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
