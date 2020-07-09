@@ -12,16 +12,10 @@ public class InsertUserImpl implements InsertUser
     public void insertUser(User user) throws SQLException {
         try{
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433", "postgres",
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/MakerSpace", "postgres",
                     "password");
             Statement st = connection.createStatement();
-            String query = "SELECT*FROM \"User\" WHERE id="+id+"AND password="+password;
-            ResultSet rs = st.executeQuery(query);
-
-            while(rs.next()){
-                if (rs.getInt(0)==0){response = true;}
-                else {response = false;}
-            }
+            String query = "UPDATE User SET status="+user.getStatus()+" WHERE id="+user.getID();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
