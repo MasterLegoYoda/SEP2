@@ -4,6 +4,9 @@ import sharedClasses.User;
 import sharedClasses.UserTransferVOneImpl;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LoadUserImpl implements LoadUser
 {
@@ -20,8 +23,9 @@ public class LoadUserImpl implements LoadUser
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 user.setStatus(rs.getByte("status"));
-                user.setUsedMaterials();
-                user.setLicences();
+                Array licencesDB = rs.getArray("licences");
+                Boolean[] list = (Boolean[])licencesDB.getArray();
+                user.setLicences(new ArrayList(Arrays.asList(list)));
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
