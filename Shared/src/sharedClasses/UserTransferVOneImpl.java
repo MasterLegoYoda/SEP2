@@ -3,7 +3,7 @@ package sharedClasses;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserTransferImpl implements Serializable, User
+public class UserTransferVOneImpl implements Serializable, User
 {
   private byte status;
   private int id;
@@ -20,7 +20,18 @@ public class UserTransferImpl implements Serializable, User
     return status;
   }
 
-  public UserTransferImpl(int id)
+  @Override public boolean equalsByID(int id)
+  {
+    if(id == this.id)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  public UserTransferVOneImpl(int id)
   {
     this.id = id;
   }
@@ -49,4 +60,5 @@ public class UserTransferImpl implements Serializable, User
   {
     return licences;
   }
+
 }
