@@ -16,7 +16,7 @@ public class AuthImpl implements Auth
             Statement st = connection.createStatement();
             String query = "SELECT*FROM \"User\" WHERE id="+id+"AND password="+password;
             ResultSet rs = st.executeQuery(query);
-            if(!rs.next()){
+            if(rs.next()){
                 response = true;
             }
         } catch (ClassNotFoundException e) {
