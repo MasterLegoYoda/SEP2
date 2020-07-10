@@ -48,10 +48,10 @@ public class ClientSocketHandler implements Runnable
               socketClient.updateMaterialsList(incomingContainer);
             });
           }
-          case WrongCredentials:
+          case LoginResult:
           {
             Platform.runLater(() -> {
-              socketClient.wrongCredentials();
+              socketClient.loginResults(incomingContainer);
             });
           }
         }

@@ -5,7 +5,7 @@ public enum ClassName
   MaterialList,
   User,
   AuthPackage,
-  WrongCredentials,
+  LoginResult,
   SQLC,
   UserRequest
 }

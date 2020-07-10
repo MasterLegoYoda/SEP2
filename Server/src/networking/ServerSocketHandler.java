@@ -70,6 +70,9 @@ public class ServerSocketHandler implements Runnable
               user = loadUser.loadUser(id);
               connectionPool.userJoin(user);
               connectionPool.addHandler(this);
+              String tmpStr = "Login Successful";
+              Container outContainer0 = new Container(tmpStr,ClassName.LoginResult);
+              sendBackData(outContainer0);
               Container outContainer1 = new Container(user, ClassName.User);
               sendBackData(outContainer1);
               Container outContainer2 = new Container(loadMaterial.loadMaterial(),ClassName.MaterialList);
@@ -78,7 +81,7 @@ public class ServerSocketHandler implements Runnable
             else if(!infoCorrectness)
             {
               String msg = "Wrong Credentials";
-              Container wrongCreds = new Container(msg,ClassName.WrongCredentials);
+              Container wrongCreds = new Container(msg,ClassName.LoginResult);
             }
           }
           catch (SQLException e)

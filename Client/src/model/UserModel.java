@@ -1,9 +1,9 @@
-package networking;
+package model;
 
 import sharedClasses.Subject;
 import sharedClasses.User;
 
-public interface UserClient extends Subject
+public interface UserModel extends Subject
 {
   void transmitUser(User user);
   //void transmitCMD(String cmd);
