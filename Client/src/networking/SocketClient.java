@@ -51,6 +51,10 @@ public class SocketClient implements LoginClient, UserClient
   {
     support.firePropertyChange("Login results",null,inPack);
   }
+  @Override public void requestUserById(Integer id)
+  {
+    socketHandler.reqUserById(id);
+  }
   @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(eventName, listener);
