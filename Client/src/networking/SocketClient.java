@@ -25,10 +25,12 @@ public class SocketClient implements LoginClient, UserClient
     thread.setDaemon(true);
     thread.start();
   }
+  /*
   @Override public void transmitCMD(String cmd)
   {
       socketHandler.transmitCMD(cmd);
   }
+   */
   @Override public void transmitUser(User user)
   {
     socketHandler.transmitUser(user);
@@ -43,11 +45,11 @@ public class SocketClient implements LoginClient, UserClient
   }
   public void updateMaterialsList(Container inPack)
   {
-    support.firePropertyChange("incomingUser",null,inPack.getObject());
+    support.firePropertyChange("incomingMaterialsList",null,inPack.getObject());
   }
-  public void wrongCredentials()
+  public void loginResults(Container inPack)
   {
-    support.firePropertyChange("incomingUser",null,null);
+    support.firePropertyChange("Login results",null,inPack);
   }
   @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
