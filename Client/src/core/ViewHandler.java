@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ViewHandler
 {
-    private Stage mainStage;
+    private Stage mainStage = null;
     private Scene adminScene;
     private Scene loginScene;
     private Scene studentScene;
@@ -21,7 +21,7 @@ public class ViewHandler
 
     public ViewHandler(ViewModelFactory viewModelFactory){ this.viewModelFactory = viewModelFactory; }
 
-    public void start() {}
+    public void start(){ openLoginView(); }
 
     public void openAdminView()
     {
@@ -90,9 +90,9 @@ public class ViewHandler
     public void openStudentView()
     {
         try {
-            if(adminScene==null)
+            if(studentScene==null)
             {
-                adminScene=getSceneStudent("../view/student/Student.fxml");
+                studentScene=getSceneStudent("../view/student/Student.fxml");
             }
             changeScene("Student",studentScene);
         }
@@ -154,9 +154,9 @@ public class ViewHandler
     public void openViaShopEmployeeView()
     {
         try {
-            if(adminScene==null)
+            if(viaShopEmployeeScene==null)
             {
-                adminScene=getViaShopEmployeeScene("../view/viaShopEmployee/viaShopEmployee.fxml");
+                viaShopEmployeeScene=getViaShopEmployeeScene("../view/viaShopEmployee/viaShopEmployee.fxml");
             }
             changeScene("ViaShopEmployee",viaShopEmployeeScene);
         }
