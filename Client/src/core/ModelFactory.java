@@ -2,17 +2,20 @@ package core;
 
 import model.LoginModel;
 import model.LoginModelImpl;
-import networking.LoginClient;
 
 public class ModelFactory
 {
-    private LoginModelImpl loginModelImpl;
-    private LoginClient loginClient;
+    private ClientFactory clientFactory;
+    private LoginModel loginModel;
 
-    public LoginModelImpl getLoginModel(){
-        if(loginModelImpl==null){
-            loginModelImpl = new LoginModelImpl(loginClient);
-        }
-        return loginModelImpl;
+    public ModelFactory(ClientFactory clientFactory){
+        this.clientFactory = clientFactory;
+        loginModel = new LoginModelImpl(clientFactory.getLoginClient());
+    }
+
+    public LoginModel getLoginModel(){return loginModel;}
+
+    public ClientFactory getClientFactory() {
+        return clientFactory;
     }
 }
