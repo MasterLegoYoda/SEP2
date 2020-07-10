@@ -29,6 +29,11 @@ public class TestModelImpl implements UserModel,LoginModel
     isLoggedIn = false;
     views = new boolean[] {false, false, false, false};
   }
+  @Override public void requestUser(int id)
+  {
+    Integer tmpInteger = id;
+    client.requestUserById(tmpInteger);
+  }
   public void loginResults(PropertyChangeEvent propertyChangeEvent)
   {
     String str = (String) ((Container)propertyChangeEvent.getNewValue()).getObject();

@@ -86,6 +86,18 @@ public class ClientSocketHandler implements Runnable
       System.out.println("login info sending");
     }
   }
+  public void reqUserById(Integer id)
+  {
+    try
+    {
+      Container outgoingContainer = new Container(id,ClassName.UserRequest);
+      outToServer.writeObject(outgoingContainer);
+    }
+    catch (IOException e)
+    {
+      System.out.println("user request");
+    }
+  }
   public void transmitCMD(String str)
   {
     try
