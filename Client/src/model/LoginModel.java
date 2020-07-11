@@ -5,5 +5,5 @@ import sharedClasses.Subject;
 
 public interface LoginModel extends Subject
 {
-  void transmitCredentials(AuthPack authPack);
+  void transmitCredentials(int id, String password);
 }

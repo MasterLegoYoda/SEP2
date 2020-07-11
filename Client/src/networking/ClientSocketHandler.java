@@ -54,6 +54,12 @@ public class ClientSocketHandler implements Runnable
               socketClient.loginResults(incomingContainer);
             });
           }
+          case UserNotFound:
+          {
+            Platform.runLater(() -> {
+              socketClient.userRequestResult(incomingContainer);
+            });
+          }
         }
       }
     }

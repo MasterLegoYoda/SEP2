@@ -26,6 +26,7 @@ public class TestModelImpl implements UserModel,LoginModel
     client.addListener("Login results",this::loginResults);
     client.addListener("incomingMaterialsList",this::saveMaterialsList);
     client.addListener("incomingUser",this::receiveUser);
+    client.addListener("UserNotFound",this::userRequestResults);
     isLoggedIn = false;
     views = new boolean[] {false, false, false, false};
   }
@@ -33,6 +34,21 @@ public class TestModelImpl implements UserModel,LoginModel
   {
     Integer tmpInteger = id;
     client.requestUserById(tmpInteger);
+  }
+  public void userRequestResults(PropertyChangeEvent propertyChangeEvent)
+  {
+    if(systemUser.getStatus() == 1)
+    {
+      support.firePropertyChange("userNotFoundStudentEmployee",null,"User not found");
+    }
+    else if(systemUser.getStatus() == 2)
+    {
+      support.firePropertyChange("userNotFoundVIAShopEmployee",null,"User not found");
+    }
+    else if(systemUser.getStatus() == 3)
+    {
+      support.firePropertyChange("userNotFoundAdmin",null,"User not found");
+    }
   }
   public void loginResults(PropertyChangeEvent propertyChangeEvent)
   {
@@ -49,6 +65,10 @@ public class TestModelImpl implements UserModel,LoginModel
     {
       support.firePropertyChange("Wrong-Credentials",null,str);
     }
+  }
+  @Override public void cancelEditing()
+  {
+    editingUser = null;
   }
   public void receiveUser(PropertyChangeEvent propertyChangeEvent)
   {
@@ -75,14 +95,38 @@ public class TestModelImpl implements UserModel,LoginModel
      else
      {
        editingUser = tmpUser;
-       support.firePropertyChange("updateEditingUser",null,editingUser);
+       if(systemUser.getStatus() == 1)
+       {
+         support.firePropertyChange("updateEditingUserStudentEmployee",null,editingUser);
+       }
+       else if(systemUser.getStatus() == 2)
+       {
+         support.firePropertyChange("updateEditingUserVIAShopEmployee",null,editingUser);
+       }
+       else if( id == 0)
+       {
+         support.firePropertyChange("updateEditingUserAdmin",null,editingUser);
+       }
+       //support.firePropertyChange("updateEditingUser",null,editingUser);
      }
    }
   }
   public void saveMaterialsList(PropertyChangeEvent propertyChangeEvent)
   {
     materialList = (MaterialList)((Container)propertyChangeEvent.getNewValue()).getObject();
-    support.firePropertyChange("MaterialsList",null,materialList);
+    if(systemUser.getStatus() == 1)
+    {
+      support.firePropertyChange("studentMaterialsList",null,systemUser);
+      //get student view
+    }
+    else if(systemUser.getStatus() == 2)
+    {
+      support.firePropertyChange("studentMaterialsList",null,systemUser);
+    }
+    else if(systemUser.getStatus() ==3)
+    {
+      support.firePropertyChange("viaShopEmployeeMaterialsList",null,systemUser);
+    }
   }
   @Override public void transmitUser(User user)
   {
@@ -111,9 +155,9 @@ public class TestModelImpl implements UserModel,LoginModel
   }
 
    */
-  @Override public void transmitCredentials(AuthPack authPack)
+  @Override public void transmitCredentials(int id, String password)
   {
-    id = authPack.getId();
+    AuthPack authPack = new AuthPack(id,password);
     client.transmitLoginInfo(authPack);
   }
   @Override public void addListener(String eventName, PropertyChangeListener listener)

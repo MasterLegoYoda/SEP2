@@ -51,6 +51,10 @@ public class SocketClient implements LoginClient, UserClient
   {
     support.firePropertyChange("Login results",null,inPack);
   }
+  public void userRequestResult(Container inPack)
+  {
+    support.firePropertyChange("UserNotFound",null,inPack);
+  }
   @Override public void requestUserById(Integer id)
   {
     socketHandler.reqUserById(id);

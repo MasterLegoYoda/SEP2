@@ -7,5 +7,6 @@ public enum ClassName
   AuthPackage,
   LoginResult,
   SQLC,
-  UserRequest
+  UserRequest,
+  UserNotFound
 }

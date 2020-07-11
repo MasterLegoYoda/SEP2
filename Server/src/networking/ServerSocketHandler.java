@@ -54,7 +54,7 @@ public class ServerSocketHandler implements Runnable
           boolean infoCorrectness = false;
           AuthPack tmpAuth = (AuthPack)incomingContainer.getObject();
           int id = tmpAuth.getId();
-          int password = tmpAuth.getPassword();
+          String password = tmpAuth.getPassword();
           try
           {
             infoCorrectness = authenticator.authenticate(id,password);
@@ -139,11 +139,19 @@ public class ServerSocketHandler implements Runnable
           try
           {
             Integer tempID = (Integer) incomingContainer.getObject();
-            if(user.getStatus() == 1 || user.getStatus() == 2 || user.getStatus() == 3)
+            if(loadUser.checkUserExistence(tempID.intValue()))
             {
-              loadUser.loadUser(tempID.intValue());
-              Container outContainer = new Container(loadUser.loadUser(tempID.intValue()), ClassName.UserRequest);
-              sendBackData(outContainer);
+              if(user.getStatus() == 1 || user.getStatus() == 2 || user.getStatus() == 3)
+              {
+                loadUser.loadUser(tempID.intValue());
+                Container outContainer = new Container(loadUser.loadUser(tempID.intValue()), ClassName.UserRequest);
+                sendBackData(outContainer);
+              }
+            }
+            else
+            {
+              String str = "User not found";
+              Container outContainer = new Container(str,ClassName.UserNotFound);
             }
           }
           catch (SQLException e)

@@ -6,7 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.admin.AdminController;
 import view.login.LoginController;
+import view.student.StudentController;
+import view.studentEmployee.StudentEmployeeController;
+import view.viaShopEmployee.ViaShopEmployeeController;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 
 public class ViewHandler
@@ -19,11 +23,18 @@ public class ViewHandler
     private Scene viaShopEmployeeScene;
     private ViewModelFactory viewModelFactory;
 
-    public ViewHandler(ViewModelFactory viewModelFactory){ this.viewModelFactory = viewModelFactory; }
+    public ViewHandler(ViewModelFactory viewModelFactory)
+    {
+        this.viewModelFactory = viewModelFactory;
+        viewModelFactory.getModelFactory().getModel().addListener("openStudentView",this::openStudentView);
+        viewModelFactory.getModelFactory().getModel().addListener("openStudentEmployeeView",this::openStudentEmployeeView);
+        viewModelFactory.getModelFactory().getModel().addListener("openVIAshopEmployeeView",this::openViaShopEmployeeView);
+        viewModelFactory.getModelFactory().getModel().addListener("openAdministratorView",this::openAdminView);
+    }
 
     public void start(){ openLoginView(); }
 
-    public void openAdminView()
+    public void openAdminView(PropertyChangeEvent propertyChangeEvent)
     {
         try {
             if(adminScene==null)
@@ -87,7 +98,7 @@ public class ViewHandler
         return new Scene(root);
     }
 
-    public void openStudentView()
+    public void openStudentView(PropertyChangeEvent propertyChangeEvent)
     {
         try {
             if(studentScene==null)
@@ -110,7 +121,7 @@ public class ViewHandler
             loader.setLocation(getClass().getResource(path));
             root = loader.load();
 
-            AdminController view = loader.getController();
+            StudentController view = loader.getController();
             view.init(this, viewModelFactory.getStudentVIewModel());
 
         } catch (IOException e) {
@@ -119,7 +130,7 @@ public class ViewHandler
         return new Scene(root);
     }
 
-    public void openStudentEmployeeView()
+    public void openStudentEmployeeView(PropertyChangeEvent propertyChangeEvent)
     {
         try {
             if(studentEmployeeScene==null)
@@ -142,7 +153,7 @@ public class ViewHandler
             loader.setLocation(getClass().getResource(path));
             root = loader.load();
 
-            AdminController view = loader.getController();
+            StudentEmployeeController view = loader.getController();
             view.init(this, viewModelFactory.getStudentEmployeeViewModel());
 
         } catch (IOException e) {
@@ -151,12 +162,12 @@ public class ViewHandler
         return new Scene(root);
     }
 
-    public void openViaShopEmployeeView()
+    public void openViaShopEmployeeView(PropertyChangeEvent propertyChangeEvent)
     {
         try {
             if(viaShopEmployeeScene==null)
             {
-                viaShopEmployeeScene=getViaShopEmployeeScene("../view/viaShopEmployee/viaShopEmployee.fxml");
+                viaShopEmployeeScene=getViaShopEmployeeScene("../view/viaShopEmployee/ViaShopEmployee.fxml");
             }
             changeScene("ViaShopEmployee",viaShopEmployeeScene);
         }
@@ -174,7 +185,7 @@ public class ViewHandler
             loader.setLocation(getClass().getResource(path));
             root = loader.load();
 
-            AdminController view = loader.getController();
+            ViaShopEmployeeController view = loader.getController();
             view.init(this, viewModelFactory.getViaShopEmployeeViewModel());
 
         } catch (IOException e) {

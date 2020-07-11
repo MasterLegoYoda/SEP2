@@ -7,7 +7,7 @@ public class AuthImpl implements Auth
     private Connection connection;
 
     @Override
-    public boolean authenticate(int id, int password) throws SQLException {
+    public boolean authenticate(int id, String password) throws SQLException {
         boolean response=false;
         try{
             Class.forName("org.postgresql.Driver");
