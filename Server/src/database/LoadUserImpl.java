@@ -1,9 +1,6 @@
 package database;
 
-import sharedClasses.Material;
-import sharedClasses.UsedMaterial;
-import sharedClasses.User;
-import sharedClasses.UserTransferVOneImpl;
+import sharedClasses.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,9 +35,10 @@ public class LoadUserImpl implements LoadUser
                 ArrayList<Integer> quantityListAL = new ArrayList<>(Arrays.asList(quantityList));
 
                 ArrayList<UsedMaterial> ums = new ArrayList<>();
+
                 int i=0;
                 while(i<materialListAL.size()){
-                    ums.add(new UsedMaterial(new Material(materialListAL.get(i),quantityListAL.get(i)),0));
+                    ums.add(new UsedMaterial(new Material(materialListAL.get(i),st.executeQuery("SELECT*FROM Material ").getInt(materialListAL.get(i))),quantityListAL.get(i)));
                     i++;
                 }
 
