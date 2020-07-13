@@ -33,14 +33,14 @@ public class LoadUserImpl implements LoadUser
                 String[] materialList = (String[])materials.getArray();
                 ArrayList<String> materialListAL = new ArrayList(Arrays.asList(materialList));
 
-                Array prices = rs.getArray("prices");
-                Integer[] priceList = ((Integer[])prices.getArray());
-                ArrayList<Integer> priceListAL = new ArrayList<>(Arrays.asList(priceList));
+                Array quantity = rs.getArray("quantity");
+                Integer[] quantityList = ((Integer[])quantity.getArray());
+                ArrayList<Integer> quantityListAL = new ArrayList<>(Arrays.asList(quantityList));
 
                 ArrayList<UsedMaterial> ums = new ArrayList<>();
                 int i=0;
                 while(i<materialListAL.size()){
-                    ums.add(new UsedMaterial(new Material(materialListAL.get(i),priceListAL.get(i)),0));
+                    ums.add(new UsedMaterial(new Material(materialListAL.get(i),quantityListAL.get(i)),0));
                     i++;
                 }
 
