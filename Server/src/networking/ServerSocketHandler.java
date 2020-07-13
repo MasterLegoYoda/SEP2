@@ -93,17 +93,14 @@ public class ServerSocketHandler implements Runnable
         {
           try
           {
-            if(user.getStatus() == 1)
+            if(user.getStatus() == 0)
             {
                 if(loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())
                 {
                   //I know I could have used one if statement, but i wanted to have them separate for possible bugs
                   if(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)incomingContainer.getObject()).getLicences()))
                   {
-                    user = (User)incomingContainer.getObject();
-                    insertUser.insertUser(user);
-                    Container outContainer = new Container(user, ClassName.User);
-                    sendBackData(outContainer);
+
                   }
                 }
             }
@@ -111,13 +108,37 @@ public class ServerSocketHandler implements Runnable
             {
               if(loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())
               {
-                insertUser.insertUser((User)incomingContainer.getObject());
-                connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
+                if((((User) incomingContainer.getObject()).getID() == user.getID()))
+                {
+                  user = (User)incomingContainer.getObject();
+                  insertUser.insertUser(user);
+                  Container outContainer = new Container(user, ClassName.User);
+                  sendBackData(outContainer);
+                }
+                else
+                {
+                  insertUser.insertUser((User)incomingContainer.getObject());
+                  connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
+                }
               }
             }
             else if(user.getStatus() == 2)
             {
+              /*
               if((loadUser.loadUser(((User) incomingContainer.getObject()).getID()).getStatus() == ((User) incomingContainer.getObject()).getStatus())&&(((UserTransferVOneImpl)loadUser.loadUser(user.getID())).getLicences().equals(((UserTransferVOneImpl)incomingContainer.getObject()).getLicences())))
+              {
+                insertUser.insertUser((User)incomingContainer.getObject());
+                connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
+              }
+               */
+              if((((User) incomingContainer.getObject()).getID() == user.getID()))
+              {
+                user = (User)incomingContainer.getObject();
+                insertUser.insertUser(user);
+                Container outContainer = new Container(user, ClassName.User);
+                sendBackData(outContainer);
+              }
+              else
               {
                 insertUser.insertUser((User)incomingContainer.getObject());
                 connectionPool.updateOnlineUserInfo((User)incomingContainer.getObject());
