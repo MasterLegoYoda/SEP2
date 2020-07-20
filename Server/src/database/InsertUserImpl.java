@@ -28,7 +28,8 @@ public class InsertUserImpl implements InsertUser
             st.setArray(2,licences);
             st.executeUpdate();
 
-            Statement st2 = connection.prepareStatement("DELETE FROM Usage WHERE ID="+user.getID());
+            Statement st2 = connection.createStatement();
+            st2.executeUpdate("DELETE FROM Usage WHERE ID="+user.getID());
 
             Statement st3 = connection.createStatement();
 
