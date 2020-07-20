@@ -14,7 +14,7 @@ public class LoadUserImpl implements LoadUser
         UserTransferVOneImpl user = new UserTransferVOneImpl(id);
         try{
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/MakerSpace", "postgres",
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/MakerS", "postgres",
                     "password");
             Statement st = connection.createStatement();
             String query = "SELECT * FROM User WHERE id="+id;
@@ -26,20 +26,16 @@ public class LoadUserImpl implements LoadUser
                 Boolean[] list = (Boolean[])licencesDB.getArray();
                 user.setLicences(new ArrayList(Arrays.asList(list)));
 
-                Array materials = rs.getArray("materials");
-                String[] materialList = (String[])materials.getArray();
-                ArrayList<String> materialListAL = new ArrayList(Arrays.asList(materialList));
-
-                Array quantity = rs.getArray("quantity");
-                Integer[] quantityList = ((Integer[])quantity.getArray());
-                ArrayList<Integer> quantityListAL = new ArrayList<>(Arrays.asList(quantityList));
 
                 ArrayList<UsedMaterial> ums = new ArrayList<>();
 
-                int i=0;
-                while(i<materialListAL.size()){
-                    ums.add(new UsedMaterial(new Material(materialListAL.get(i),st.executeQuery("SELECT*FROM Material ").getInt(materialListAL.get(i))),quantityListAL.get(i)));
-                    i++;
+                String query2 = "SELECT * FROM Usage WHERE id="+id;
+                ResultSet rs2 = st.executeQuery(query2);
+                while(rs2.next()){
+                    String query3 = "SELECT * FROM Material WHERE material="+rs2.getString("material");
+                    ResultSet rs3 = st.executeQuery(query3);
+                    float price = rs3.getFloat("price");
+                    ums.add(new UsedMaterial(new Material(rs2.getString("material"),price),rs2.getInt("unit")));
                 }
 
                 user.setUsedMaterials(ums);

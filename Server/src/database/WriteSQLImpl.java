@@ -11,7 +11,7 @@ public class WriteSQLImpl implements WriteSQL
   {
     try{
       Class.forName("org.postgresql.Driver");
-      connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/MakerSpace", "postgres",
+      connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/MakerS", "postgres",
           "password");
       Statement st = connection.createStatement();
       String query = cmd;
