@@ -36,15 +36,15 @@ public class ViaShopEmployeeViewModel
   public void setEditingUser(PropertyChangeEvent propertyChangeEvent)
   {
     editingUser = (UserTransferVOneImpl) propertyChangeEvent.getNewValue();
-    int debtValue = 0;
+    float debtValue = 0;
     id.setValue(String.valueOf(editingUser.getID()));
     for(int x = 0; x < editingUser.getUsedMaterials().size();x++)
     {
       for (int i = 0; i < materialList.getMaterials().size();i++)
       {
-        if(editingUser.getUsedMaterials().get(x).getMaterial().getName().equalsIgnoreCase(materialList.getMaterials().get(i)))
+        //if(editingUser.getUsedMaterials().get(x).getMaterial().getName().equalsIgnoreCase(materialList.getMaterials().get(i)))
         {
-          int alpha = editingUser.getUsedMaterials().get(x).getUnitUsed()*materialList.getMaterials().get(i).getPricePerUnit();
+          float alpha = editingUser.getUsedMaterials().get(x).getUnitUsed()*materialList.getMaterials().get(i).getPricePerUnit();
           debtValue = (alpha + debtValue);
         }
       }
