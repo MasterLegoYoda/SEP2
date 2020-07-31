@@ -41,9 +41,10 @@ public class LoginModelImpl implements LoginModel
       support.firePropertyChange("Wrong Credentials",null,str);
     }
   }
-  @Override public void transmitCredentials(AuthPack authPack)
+  @Override public void transmitCredentials(int id, String password)
   {
-    client.transmitLoginInfo(authPack);
+    AuthPack temp = new AuthPack(id, password);
+    client.transmitLoginInfo(temp);
   }
   @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
