@@ -72,6 +72,10 @@ public class ClientSocketHandler implements Runnable
   {
     try
     {
+      if(user == null)
+      {
+        System.out.println("USER IS NULL");
+      }
       Container outgoingContainer = new Container(user, ClassName.User);
       outToServer.writeObject(outgoingContainer);
     }

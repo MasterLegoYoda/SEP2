@@ -37,7 +37,6 @@ public class StudentViewModel
     model.addListener("studentMaterialsList",this::receiveMaterialsList);
     materialsCB = FXCollections.observableArrayList();
     tableMaterials = FXCollections.observableArrayList();
-    tableMaterials.addAll(getUpdatedTableInfo());
   }
 
 

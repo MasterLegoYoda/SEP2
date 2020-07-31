@@ -11,7 +11,7 @@ import java.net.Socket;
 
 public class SocketClient implements LoginClient, UserClient
 {
-  private static final String SERVER_IP = "127.0.0.1";
+  private static final String SERVER_IP = "192.168.87.170";
   private static final int SERVER_PORT = 9090;
   private ClientSocketHandler socketHandler;
   private Socket socket;

@@ -26,6 +26,7 @@ public class ViewHandler
     public ViewHandler(ViewModelFactory viewModelFactory)
     {
         this.viewModelFactory = viewModelFactory;
+        mainStage = new Stage();
         viewModelFactory.getModelFactory().getModel().addListener("openStudentView",this::openStudentView);
         viewModelFactory.getModelFactory().getModel().addListener("openStudentEmployeeView",this::openStudentEmployeeView);
         viewModelFactory.getModelFactory().getModel().addListener("openVIAshopEmployeeView",this::openViaShopEmployeeView);

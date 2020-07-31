@@ -23,6 +23,7 @@ public class TestModelImpl implements UserModel,LoginModel
   public TestModelImpl(SocketClient client)
   {
     this.client = client;
+    support = new PropertyChangeSupport(this);
     client.addListener("Login results",this::loginResults);
     client.addListener("incomingMaterialsList",this::saveMaterialsList);
     client.addListener("incomingUser",this::receiveUser);
