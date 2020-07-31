@@ -117,16 +117,16 @@ public class TestModelImpl implements UserModel,LoginModel
   public void saveMaterialsList(PropertyChangeEvent propertyChangeEvent)
   {
     materialList = (MaterialList)((Container)propertyChangeEvent.getNewValue()).getObject();
-    if(systemUser.getStatus() == 1)
+    if(systemUser.getStatus() == 0)
     {
       support.firePropertyChange("studentMaterialsList",null,materialList);
       //get student view
     }
-    else if(systemUser.getStatus() == 2)
+    else if(systemUser.getStatus() == 1)
     {
-      support.firePropertyChange("studentMaterialsList",null,materialList);
+      support.firePropertyChange("studentEmployeeMaterialsList",null,materialList);
     }
-    else if(systemUser.getStatus() ==3)
+    else if(systemUser.getStatus() ==2)
     {
       support.firePropertyChange("viaShopEmployeeMaterialsList",null,materialList);
     }

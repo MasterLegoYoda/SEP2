@@ -21,7 +21,7 @@ public class ViewModelFactory
         loginViewModel = new LoginViewModel(modelFactory.getModel());
         adminViewModel = new AdminViewModel(modelFactory.getModel());
         studentVIewModel = new StudentViewModel(modelFactory.getModel());
-        studentEmployeeViewModel = new StudentEmployeeViewModel();
+        studentEmployeeViewModel = new StudentEmployeeViewModel(modelFactory.getModel());
         viaShopEmployeeViewModel = new ViaShopEmployeeViewModel(modelFactory.getModel());
     }
 

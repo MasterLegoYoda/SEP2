@@ -31,6 +31,7 @@ public class StudentController{
         this.studentViewModel = studentViewModel;
         studentIDLabel.textProperty().bindBidirectional(studentViewModel.studentIDProperty());
         totalDebtLabel.textProperty().bindBidirectional(studentViewModel.totalDebtProperty());
+        addMaterialComboBox.setItems(studentViewModel.getMaterialsCB());
         update = new SimpleBooleanProperty();
         update.bindBidirectional(studentViewModel.updaterProperty());
         UnaryOperator<TextFormatter.Change> filter = change ->
@@ -76,7 +77,10 @@ public class StudentController{
         {
             String str = (String)addMaterialComboBox.getValue();
             int x = Integer.valueOf(addMaterialAmountTextField.getText());
-            studentViewModel.addMaterial(str,x);
+            if(x>0)
+            {
+                studentViewModel.addMaterial(str,x);
+            }
         }
     }
 

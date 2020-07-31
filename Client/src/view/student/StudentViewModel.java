@@ -86,7 +86,8 @@ public class StudentViewModel
           {
             if(name.contains(materials.get(y).getName()))
             {
-              temp.add(new UsedMaterial(materials.get(y),amount));
+              int t = amount + user.getUsedMaterials().get(x).getUnitUsed();
+              temp.add(new UsedMaterial(materials.get(y),t));
             }
           }
         }
@@ -132,7 +133,13 @@ public class StudentViewModel
       updater.set(true);
     }
   }
-
+  public void requestUser(int id)
+  {
+    if(String.valueOf(id).length() == 6)
+    {
+      userModel.requestUser(id);
+    }
+  }
   public String getStudentID()
   {
     return studentID.get();
@@ -166,5 +173,10 @@ public class StudentViewModel
   public ObservableList<TableMaterial> getTableMaterials()
   {
     return tableMaterials;
+  }
+
+  public ObservableList<String> getMaterialsCB()
+  {
+    return materialsCB;
   }
 }
