@@ -20,7 +20,7 @@ public class ViewModelFactory
         this.modelFactory = modelFactory;
         loginViewModel = new LoginViewModel(modelFactory.getModel());
         adminViewModel = new AdminViewModel(modelFactory.getModel());
-        studentVIewModel = new StudentViewModel();
+        studentVIewModel = new StudentViewModel(modelFactory.getModel());
         studentEmployeeViewModel = new StudentEmployeeViewModel();
         viaShopEmployeeViewModel = new ViaShopEmployeeViewModel(modelFactory.getModel());
     }

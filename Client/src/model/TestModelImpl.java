@@ -80,16 +80,19 @@ public class TestModelImpl implements UserModel,LoginModel
        systemUser = tmpUser;
        if(systemUser.getStatus() == 1)
        {
-         support.firePropertyChange("openStudentView",null,systemUser);
+         support.firePropertyChange("openStudentView",null,null);
+         support.firePropertyChange("userToStudentViewModel",null,systemUser);
          //get student view
        }
        else if(systemUser.getStatus() == 2)
        {
-         support.firePropertyChange("openStudentEmployeeView",null,systemUser);
+         support.firePropertyChange("openStudentEmployeeView",null,null);
+         support.firePropertyChange("userToStudentEmployeeViewModel",null,systemUser);
        }
        else if(systemUser.getStatus() ==3)
        {
-         support.firePropertyChange("openVIAshopEmployeeView",null,systemUser);
+         support.firePropertyChange("openVIAshopEmployeeView",null,null);
+         support.firePropertyChange("userToViaShopEmployeeViewModel",null,systemUser);
        }
      }
      else
@@ -116,16 +119,16 @@ public class TestModelImpl implements UserModel,LoginModel
     materialList = (MaterialList)((Container)propertyChangeEvent.getNewValue()).getObject();
     if(systemUser.getStatus() == 1)
     {
-      support.firePropertyChange("studentMaterialsList",null,systemUser);
+      support.firePropertyChange("studentMaterialsList",null,materialList);
       //get student view
     }
     else if(systemUser.getStatus() == 2)
     {
-      support.firePropertyChange("studentMaterialsList",null,systemUser);
+      support.firePropertyChange("studentMaterialsList",null,materialList);
     }
     else if(systemUser.getStatus() ==3)
     {
-      support.firePropertyChange("viaShopEmployeeMaterialsList",null,systemUser);
+      support.firePropertyChange("viaShopEmployeeMaterialsList",null,materialList);
     }
   }
   @Override public void transmitUser(User user)
