@@ -2,6 +2,8 @@ package core;
 
 import networking.*;
 
+import java.io.IOException;
+
 public class ClientFactory
 {
     /*
@@ -10,7 +12,8 @@ public class ClientFactory
      */
     //LATER REPLACE WITH AN INTERFACE
     private SocketClient client;
-    public ClientFactory(){
+    public ClientFactory() throws IOException
+    {
         client = new SocketClient();
         /*
     loginClient = newSocketClient;

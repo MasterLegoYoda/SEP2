@@ -79,18 +79,18 @@ public class TestModelImpl implements UserModel,LoginModel
      if(tmpUser.getID() == id)
      {
        systemUser = tmpUser;
-       if(systemUser.getStatus() == 1)
+       if(systemUser.getStatus() == 0)
        {
          support.firePropertyChange("openStudentView",null,null);
          support.firePropertyChange("userToStudentViewModel",null,systemUser);
          //get student view
        }
-       else if(systemUser.getStatus() == 2)
+       else if(systemUser.getStatus() == 1)
        {
          support.firePropertyChange("openStudentEmployeeView",null,null);
          support.firePropertyChange("userToStudentEmployeeViewModel",null,systemUser);
        }
-       else if(systemUser.getStatus() ==3)
+       else if(systemUser.getStatus() ==2)
        {
          support.firePropertyChange("openVIAshopEmployeeView",null,null);
          support.firePropertyChange("userToViaShopEmployeeViewModel",null,systemUser);

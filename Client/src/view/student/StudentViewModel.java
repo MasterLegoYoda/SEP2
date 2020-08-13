@@ -39,8 +39,6 @@ public class StudentViewModel
     tableMaterials = FXCollections.observableArrayList();
   }
 
-
-
   public void receiveUser(PropertyChangeEvent propertyChangeEvent)
   {
     user = (UserTransferVOneImpl)propertyChangeEvent.getNewValue();

@@ -11,15 +11,20 @@ import java.net.Socket;
 
 public class SocketClient implements LoginClient, UserClient
 {
-  private static final String SERVER_IP = "192.168.87.170";
+  //private static final String SERVER_IP = "192.168.87.170";
   private static final int SERVER_PORT = 9090;
   private ClientSocketHandler socketHandler;
   private Socket socket;
   private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-  public void initialize() throws IOException
+  public SocketClient() throws IOException
   {
-    socket = new Socket(SERVER_IP, SERVER_PORT);
+    init();
+  }
+
+  public void init() throws IOException
+  {
+    socket = new Socket("localhost", SERVER_PORT);
     socketHandler = new ClientSocketHandler(socket, this);
     Thread thread = new Thread(socketHandler);
     thread.setDaemon(true);
